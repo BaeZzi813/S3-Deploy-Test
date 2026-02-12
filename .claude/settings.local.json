@@ -5,7 +5,8 @@
       "Bash(npm run dev:*)",
       "Bash(taskkill:*)",
       "Bash(cmd /c \"taskkill /PID 11388 /F\")",
-      "Bash(cmd /c \"taskkill /F /PID 11388\")"
+      "Bash(cmd /c \"taskkill /F /PID 11388\")",
+      "Bash(cmd /c \"taskkill /F /PID 25124 2>nul & del /f C:\\\\Users\\\\yoonj\\\\s3-test\\\\.next\\\\dev\\\\lock 2>nul\")"
     ]
   }
 }
