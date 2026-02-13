@@ -1,36 +1,29 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌙 음력 계산기 (Lunar Calendar Converter)
 
-## Getting Started
+Next.js와 `solarlunar` 라이브러리를 활용하여 제작한 심플하고 직관적인 음력 계산기입니다. 
+양력 날짜를 입력하면 해당 날짜에 맞는 음력 날짜를 즉시 계산해 줍니다.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ 주요 기능 (Features)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **양력 ↔ 음력 변환**: `solarlunar` 라이브러리를 통한 정확한 날짜 데이터 제공.
+- **모바일 최적화 UI**: 모바일에서도 연도 선택이 편리하도록 `Select` 박스 형태의 UI 제공.
+- **편안한 디자인**: Tailwind CSS와 Glassmorphism 스타일을 적용한 다크 모드 기반 디자인.
+- **애니메이션 효과**: 배경 플로팅 애니메이션 및 결과창 페이드인 효과.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 기술 스택 (Tech Stack)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| 구분 | 기술 스택 |
+| :--- | :--- |
+| **Framework** | Next.js |
+| **Styling** | Tailwind CSS |
+| **Library** | solarLunar |
+| **Language** | TypeScript |
+| **Deployment** | AWS S3 |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
