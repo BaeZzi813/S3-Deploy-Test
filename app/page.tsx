@@ -41,6 +41,7 @@ export default function Home() {
             <input
               type="date"
               max="9999-12-31"
+              required
               value={input}
               onChange={getSolarInput}
               className="w-full bg-[#0b0e17] border border-[#1e293b] rounded-lg px-4 py-3 text-[#e2e8f0] transition-all duration-200 focus:border-[#6366f1] focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
