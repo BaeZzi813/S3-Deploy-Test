@@ -1,26 +1,39 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import solarLunar from "solarlunar";
 
 export default function Home() {
   const [input, setInput] = useState("");
   const [result, setResult] = useState("");
+  const [error, setError] = useState("");
+
+  const datePickerRef = useRef(null)
 
   const getSolarInput = (e: ChangeEvent<HTMLInputElement>) => {
-    setInput(e.target.value);
+    let val = e.target.value.replace(/[^0-9]/g, "");
+
+    if (val.length > 4) val = val.slice(0, 4) + "-" + val.slice(4);
+    if (val.length > 7) val = val.slice(0, 7) + "-" + val.slice(7);
+    if (val.length > 10) val = val.slice(0, 10);
+    setInput(val);
+    setError("");
   };
 
   const convertSolarToLunar = (date: string) => {
     if (!input) return;
-    const [year, month, day] = date.split("-").map(Number);
-    if(year < 1900 || year > 2100) {
-      setResult('지원 범위는 1900년 ~ 2100년입니다.')
-      return;
-    }
-    const reverted = solarLunar.solar2lunar(year, month, day);
+    
+    const parts = input.split('-').map(Number)
+    if(parts.length !== 3) {setError('YYYY-MM-DD 형식으로 입력해주세요.'); return;}
 
-    setResult(`${reverted.lYear}년 ${reverted.lMonth}월 ${reverted.lDay}일`);
+    const [year, month, day] = parts;
+    if(year < 1900 || year > 2100) {setError('지원 범위는 1900년 ~ 2100년입니다.'); return;}
+    if(month < 1 || month > 12) {setError('월은 1 ~ 12 사이로 입력해주세요.'); return;}
+    if(day < 1 || day > 31) {setError('일은 1 ~ 31 사이로 입력해주세요.'); return;}
+
+    const reverted = solarLunar.solar2lunar(year, month, day)
+    setError('')
+    setResult(`${reverted.lYear}년 ${reverted.lMonth}월 ${reverted.lDay}일`)
   };
 
   return (
@@ -49,19 +62,25 @@ export default function Home() {
           </label>
           <div className="relative mb-6">
             <input
-              type="date"
-              max="9999-12-31"
-              required
+              type="text"
+              inputMode="numeric"
+              maxLength={10}
               value={input}
               onChange={getSolarInput}
               onKeyDown={(e) => {
                 if (e.key === "Enter") convertSolarToLunar(input);
               }}
-              placeholder="테스트테스트"
-              className="w-full bg-[#0b0e17] border border-[#1e293b] rounded-lg px-4 py-3 text-[#e2e8f0] transition-all duration-200 focus:border-[#6366f1] focus:ring-2 focus:ring-indigo-500/20 focus:outline-none [color-scheme:dark] [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-10 [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-inner-spin-button]:hidden [&::-webkit-clear-button]:hidden"
+              placeholder="연도-월-일"
+              className="w-full bg-[#0b0e17] border border-[#1e293b] rounded-lg px-4 py-3 text-[#e2e8f0] placeholder-[#4b5563] transition-all duration-200 focus:border-[#6366f1] focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
+            />
+            <input type="date" ref={datePickerRef} className="absolute opacity-0 pointer-events-none w-0 h-0"
+            onChange={(e) => {
+              if(e.target.value) setInput(e.target.value)
+            }}
             />
             <svg
-              className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94a3b8] pointer-events-none"
+            onClick={() => datePickerRef.current?.showPicker()}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94a3b8] cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -75,6 +94,9 @@ export default function Home() {
               />
             </svg>
           </div>
+          {error && (
+            <p className="text-red-400 text-sm mb-4 -mt-4">{error}</p>
+          )}
           <button
             onClick={() => convertSolarToLunar(input)}
             disabled={!input}
