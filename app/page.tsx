@@ -8,7 +8,7 @@ export default function Home() {
   const [result, setResult] = useState("");
   const [error, setError] = useState("");
 
-  const datePickerRef = useRef(null)
+  const datePickerRef = useRef<HTMLInputElement>(null)
 
   const getSolarInput = (e: ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value.replace(/[^0-9]/g, "");
