@@ -43,12 +43,6 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-input[type="date"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   position: absolute;
@@ -62,13 +56,3 @@ input[type="date"]::-webkit-inner-spin-button,
 input[type="date"]::-webkit-clear-button {
   display: none;
 }
-
-input[type="date"]::before {
-  content: '연도-월-일';
-  width: 100%;
-}
-
-input[type="date"]:valid::before {
-  display: none;
-}
-

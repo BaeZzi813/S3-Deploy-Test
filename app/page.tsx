@@ -44,6 +44,7 @@ export default function Home() {
               required
               value={input}
               onChange={getSolarInput}
+              placeholder="테스트테스트"
               className="w-full bg-[#0b0e17] border border-[#1e293b] rounded-lg px-4 py-3 text-[#e2e8f0] transition-all duration-200 focus:border-[#6366f1] focus:ring-2 focus:ring-indigo-500/20 focus:outline-none"
             />
             <svg className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94a3b8] pointer-events-none" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
